@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch DailyWaterIntakeSystem",
+      "request": "launch",
+      "mainClass": "DailyWaterIntakeSystem",
+      "classPaths": [
+        "${workspaceFolder}/bin"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}
