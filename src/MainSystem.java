@@ -20,65 +20,72 @@ public class MainSystem {
             System.out.print("Enter Choice: ");
             choice = inputHandler.readInt();
 
-            if (choice == 1) {
-                System.out.println("\n===== Register User =====");
-                System.out.print("Enter Name: ");
-                user.userName = inputHandler.readText();
-                System.out.print("Enter Age: ");
-                user.userAge = inputHandler.readInt();
-                System.out.print("Enter Gender: ");
-                user.userGender = inputHandler.readText();
-                System.out.print("Enter Weight (kg): ");
-                user.userWeight = inputHandler.readDouble();
-                user.dailyWaterGoal = GoalCalculator.calculateDailyGoal(user.userWeight);
-                waterIntakeManager.clearHistory();
-                System.out.println("User Registered Successfully!");
-            } else if (choice == 2) {
-                if (!user.isRegistered()) {
-                    System.out.println("Please register first.");
-                } else {
-                    System.out.println("Recommended Water Intake: " + (int) user.dailyWaterGoal + " ml");
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("\n===== Register User =====");
+                    System.out.print("Enter Name: ");
+                    user.userName = inputHandler.readText();
+                    System.out.print("Enter Age: ");
+                    user.userAge = inputHandler.readInt();
+                    System.out.print("Enter Gender: ");
+                    user.userGender = inputHandler.readText();
+                    System.out.print("Enter Weight (kg): ");
+                    user.userWeight = inputHandler.readDouble();
+                    user.dailyWaterGoal = GoalCalculator.calculateDailyGoal(user.userWeight);
+                    waterIntakeManager.clearHistory();
+                    System.out.println("User Registered Successfully!");
                 }
-            } else if (choice == 3) {
-                if (!user.isRegistered()) {
-                    System.out.println("Please register first.");
-                } else {
-                    System.out.print("Enter Water Intake (ml): ");
-                    double waterIntake = inputHandler.readDouble();
-                    while (waterIntake > MAX_WATER_INTAKE) {
-                        System.out.println("Please enter a value up to " + (int) MAX_WATER_INTAKE + " ml at a time.");
-                        System.out.print("Enter Water Intake (ml): ");
-                        waterIntake = inputHandler.readDouble();
+                case 2 -> {
+                    if (!user.isRegistered()) {
+                        System.out.println("Please register first.");
+                    } else {
+                        System.out.println("Recommended Water Intake: " + (int) user.dailyWaterGoal + " ml");
                     }
-                    waterIntakeManager.addWater(waterIntake);
-                    System.out.println("Water Intake Added Successfully!");
                 }
-            } else if (choice == 4) {
-                if (!user.isRegistered()) {
-                    System.out.println("Please register first.");
-                } else if (waterIntakeManager.isEmpty()) {
-                    System.out.println("No Records Found.");
-                } else {
-                    System.out.println("\n===== Water Intake History =====");
-                    waterIntakeManager.printHistory();
+                case 3 -> {
+                    if (!user.isRegistered()) {
+                        System.out.println("Please register first.");
+                    } else {
+                        System.out.print("Enter Water Intake (ml): ");
+                        double waterIntake = inputHandler.readDouble();
+                        while (waterIntake > MAX_WATER_INTAKE) {
+                            System.out.println("Please enter a value up to " + (int) MAX_WATER_INTAKE + " ml at a time.");
+                            System.out.print("Enter Water Intake (ml): ");
+                            waterIntake = inputHandler.readDouble();
+                        }
+                        waterIntakeManager.addWater(waterIntake);
+                        System.out.println("Water Intake Added Successfully!");
+                    }
                 }
-            } else if (choice == 5) {
-                if (!user.isRegistered()) {
-                    System.out.println("Please register first.");
-                } else {
-                    double totalWaterIntake = waterIntakeManager.getTotal();
-                    System.out.println("Status: " + HydrationEvaluator.hydrationStatus(totalWaterIntake, user.dailyWaterGoal));
+                case 4 -> {
+                    if (!user.isRegistered()) {
+                        System.out.println("Please register first.");
+                    } else if (waterIntakeManager.isEmpty()) {
+                        System.out.println("No Records Found.");
+                    } else {
+                        System.out.println("\n===== Water Intake History =====");
+                        waterIntakeManager.printHistory();
+                    }
                 }
-            } else if (choice == 6) {
-                if (!user.isRegistered()) {
-                    System.out.println("Please register first.");
-                } else {
-                    SummaryDisplay.show(user, waterIntakeManager);
+                case 5 -> {
+                    if (!user.isRegistered()) {
+                        System.out.println("Please register first.");
+                    } else {
+                        double totalWaterIntake = waterIntakeManager.getTotal();
+                        System.out.println("Status: " + HydrationEvaluator.hydrationStatus(totalWaterIntake, user.dailyWaterGoal));
+                    }
                 }
-            } else if (choice == 7) {
-                System.out.println("Thank you!");
-            } else {
-                System.out.println("Invalid Choice!");
+                case 6 -> {
+                    if (!user.isRegistered()) {
+                        System.out.println("Please register first.");
+                    } else {
+                        SummaryDisplay.show(user, waterIntakeManager);
+                    }
+                }
+                case 7 ->
+                    System.out.println("Thank you!");
+                default ->
+                    System.out.println("Invalid Choice!");
             }
         }
     }

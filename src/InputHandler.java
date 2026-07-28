@@ -17,7 +17,7 @@ public class InputHandler {
         while (true) {
             try {
                 return Integer.parseInt(input.nextLine().trim());
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid whole number.");
             }
         }
@@ -32,7 +32,7 @@ public class InputHandler {
                 } else {
                     return value;
                 }
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
             }
         }
