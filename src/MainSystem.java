@@ -1,5 +1,7 @@
 // Team task: AFFAN UMER - overall program flow, menu handling, and feature coordination.
 public class MainSystem {
+    static final double MAX_WATER_INTAKE = 5000;
+
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
         User user = new User();
@@ -43,6 +45,11 @@ public class MainSystem {
                 } else {
                     System.out.print("Enter Water Intake (ml): ");
                     double waterIntake = inputHandler.readDouble();
+                    while (waterIntake > MAX_WATER_INTAKE) {
+                        System.out.println("Please enter a value up to " + (int) MAX_WATER_INTAKE + " ml at a time.");
+                        System.out.print("Enter Water Intake (ml): ");
+                        waterIntake = inputHandler.readDouble();
+                    }
                     waterIntakeManager.addWater(waterIntake);
                     System.out.println("Water Intake Added Successfully!");
                 }
