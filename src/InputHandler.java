@@ -1,68 +1,59 @@
 import java.util.Scanner;
 
-// Team task: Salem Abdalla - console input handling and input parsing.
-
 public class InputHandler {
 
-    private final Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
-    String readText(String textMessage) {
-        String value;
-
-        do {
-            System.out.print(textMessage);
+    String readText(String prompt) {
+        String value = "";
+        while (value.isEmpty()) {
+            System.out.print(prompt);
             value = input.nextLine().trim();
-
             if (value.isEmpty()) {
                 System.out.println("Please enter a value.");
             }
-        } while (value.isEmpty());
-
+        }
         return value;
     }
 
-    int readInt(String numberMessage) {
+    int readInt(String prompt) {
         while (true) {
             try {
-                System.out.print(numberMessage);
+                System.out.print(prompt);
                 return Integer.parseInt(input.nextLine().trim());
-            } catch (NumberFormatException exception) {
+            } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid whole number.");
             }
         }
     }
 
-    double readDouble(String decimalMessage) {
+    double readDouble(String prompt) {
         while (true) {
             try {
-                System.out.print(decimalMessage);
+                System.out.print(prompt);
                 return Double.parseDouble(input.nextLine().trim());
-            } catch (NumberFormatException exception) {
+            } catch (NumberFormatException e) {
                 System.out.println("Please enter a valid number.");
             }
         }
     }
 
-    int readPositiveInt(String numberMessage) {
+    int readPositiveInt(String prompt) {
         while (true) {
-            int value = readInt(numberMessage);
-
+            int value = readInt(prompt);
             if (value > 0) {
                 return value;
             }
-
             System.out.println("Please enter a number greater than zero.");
         }
     }
 
-    double readPositiveDouble(String decimalMessage) {
+    double readPositiveDouble(String prompt) {
         while (true) {
-            double value = readDouble(decimalMessage);
-
+            double value = readDouble(prompt);
             if (value > 0) {
                 return value;
             }
-
             System.out.println("Please enter a number greater than zero.");
         }
     }

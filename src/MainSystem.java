@@ -1,22 +1,19 @@
-// Team task: AFFAN UMER - overall program flow, menu handling, and feature coordination.
 public class MainSystem {
 
     private static final String REGISTRATION_REQUIRED = "Please register first.";
-
-    private final InputHandler inputHandler = new InputHandler();
-    private final User user = new User();
-    private final WaterIntakeManager waterIntakeManager = new WaterIntakeManager();
+    private InputHandler inputHandler = new InputHandler();
+    private User user = new User();
+    private WaterIntakeManager waterIntakeManager = new WaterIntakeManager();
 
     public static void main(String[] args) {
         new MainSystem().startMenu();
     }
 
     void startMenu() {
-        int choice;
+        int choice = 0;
 
-        do {
+        while (choice != 7) {
             printMenu();
-
             choice = inputHandler.readInt("Enter Choice: ");
 
             switch (choice) {
@@ -44,33 +41,21 @@ public class MainSystem {
                 default:
                     System.out.println("Invalid Choice!");
             }
-        } while (choice != 7);
+        }
     }
 
     private void printMenu() {
-        System.out.println("""
-
-                ===== Daily Water Intake System =====
-                1. Register User
-                2. View Water Goal
-                3. Add Water Intake
-                4. View Water History
-                5. Check Hydration Status
-                6. View Daily Summary
-                7. Exit
-                """);
+        System.out.println("\n===== Daily Water Intake System =====");
+        System.out.println("1. Register User");
+        System.out.println("2. View Water Goal");
+        System.out.println("3. Add Water Intake");
+        System.out.println("4. View Water History");
+        System.out.println("5. Check Hydration Status");
+        System.out.println("6. View Daily Summary");
+        System.out.println("7. Exit");
     }
 
-    private boolean requireRegistration() {
-        if (!user.isRegistered()) {
-            System.out.println(REGISTRATION_REQUIRED);
-            return false;
-        }
-
-        return true;
-    }
-
-    void registerUser() {
+    private void registerUser() {
         System.out.println("\n===== Register User =====");
 
         user.setName(inputHandler.readText("Enter Name: "));
@@ -78,32 +63,30 @@ public class MainSystem {
         user.setGender(inputHandler.readText("Enter Gender: "));
         user.setWeight(inputHandler.readPositiveDouble("Enter Weight (kg): "));
         user.setDailyWaterGoal(GoalCalculator.calculateDailyGoal(user.getWeight()));
-
         waterIntakeManager.clearHistory();
 
         System.out.println("User Registered Successfully!");
     }
 
-    void showWaterGoal() {
+    private void showWaterGoal() {
         if (!requireRegistration()) {
             return;
         }
 
-        System.out.printf("Recommended Water Intake: %.0f ml%n", user.getDailyWaterGoal());
+        System.out.println("Recommended Water Intake: " + (int) user.getDailyWaterGoal() + " ml");
     }
 
-    void addWaterIntake() {
+    private void addWaterIntake() {
         if (!requireRegistration()) {
             return;
         }
 
         double amount = inputHandler.readPositiveDouble("Enter Water Intake (ml): ");
         waterIntakeManager.addWaterIntake(amount);
-
         System.out.println("Water Intake Added Successfully!");
     }
 
-    void showHistory() {
+    private void showHistory() {
         if (!requireRegistration()) {
             return;
         }
@@ -117,20 +100,28 @@ public class MainSystem {
         System.out.print(waterIntakeManager.buildHistoryReport());
     }
 
-    void checkHydration() {
+    private void checkHydration() {
         if (!requireRegistration()) {
             return;
         }
 
         double total = waterIntakeManager.calculateTotalWater();
-        System.out.println("Status: " + HydrationEvaluator.evaluate(total, user.getDailyWaterGoal()));
+        System.out.println("Status: " + HydrationEvaluator.hydrationStatus(total, user.getDailyWaterGoal()));
     }
 
-    void showSummary() {
+    private void showSummary() {
         if (!requireRegistration()) {
             return;
         }
 
         SummaryDisplay.show(user, waterIntakeManager);
+    }
+
+    private boolean requireRegistration() {
+        if (!user.isRegistered()) {
+            System.out.println(REGISTRATION_REQUIRED);
+            return false;
+        }
+        return true;
     }
 }

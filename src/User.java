@@ -1,8 +1,7 @@
-// Team task: Parmis Hajianfard - user profile data, registration state, and stored details.
 public class User {
 
-    private String name;
-    private String gender;
+    private String name = "";
+    private String gender = "";
     private int age;
     private double weight;
     private double dailyWaterGoal;
