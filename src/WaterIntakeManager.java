@@ -1,21 +1,17 @@
+// Team task: Isamatov Damir - stores water intake entries and calculates totals.
 import java.util.ArrayList;
-import java.util.List;
 
 public class WaterIntakeManager {
+    ArrayList<Double> waterHistory = new ArrayList<>();
 
-    private List<Double> waterHistory = new ArrayList<>();
-
-    void addWaterIntake(double amount) {
-        if (amount <= 0) {
-            return;
-        }
+    void addWater(double amount) {
         waterHistory.add(amount);
     }
 
-    double calculateTotalWater() {
+    double getTotal() {
         double total = 0;
-        for (int i = 0; i < waterHistory.size(); i++) {
-            total += waterHistory.get(i);
+        for (double amount : waterHistory) {
+            total += amount;
         }
         return total;
     }
@@ -24,15 +20,13 @@ public class WaterIntakeManager {
         return waterHistory.isEmpty();
     }
 
-    String buildHistoryReport() {
-        StringBuilder report = new StringBuilder();
-        for (int i = 0; i < waterHistory.size(); i++) {
-            report.append(i + 1).append(". ").append(waterHistory.get(i)).append(" ml\n");
-        }
-        return report.toString();
-    }
-
     void clearHistory() {
         waterHistory.clear();
+    }
+
+    void printHistory() {
+        for (int i = 0; i < waterHistory.size(); i++) {
+            System.out.println((i + 1) + ". " + waterHistory.get(i) + " ml");
+        }
     }
 }

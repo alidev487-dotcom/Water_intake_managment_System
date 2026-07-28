@@ -1,5 +1,5 @@
+// Team task: Hadi Abdul - decides the hydration status message.
 public class HydrationEvaluator {
-
     static String hydrationStatus(double total, double goal) {
         if (goal <= 0) {
             return "No Goal Set";
