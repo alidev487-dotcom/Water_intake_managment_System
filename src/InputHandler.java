@@ -7,17 +7,63 @@ public class InputHandler {
     private final Scanner input = new Scanner(System.in);
 
     String readText(String textMessage) {
-        System.out.print(textMessage);
-        return input.nextLine();
+        String value;
+
+        do {
+            System.out.print(textMessage);
+            value = input.nextLine().trim();
+
+            if (value.isEmpty()) {
+                System.out.println("Please enter a value.");
+            }
+        } while (value.isEmpty());
+
+        return value;
     }
 
     int readInt(String numberMessage) {
-        System.out.print(numberMessage);
-        return Integer.parseInt(input.nextLine());
+        while (true) {
+            try {
+                System.out.print(numberMessage);
+                return Integer.parseInt(input.nextLine().trim());
+            } catch (NumberFormatException exception) {
+                System.out.println("Please enter a valid whole number.");
+            }
+        }
     }
 
     double readDouble(String decimalMessage) {
-        System.out.print(decimalMessage);
-        return Double.parseDouble(input.nextLine());
+        while (true) {
+            try {
+                System.out.print(decimalMessage);
+                return Double.parseDouble(input.nextLine().trim());
+            } catch (NumberFormatException exception) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+    }
+
+    int readPositiveInt(String numberMessage) {
+        while (true) {
+            int value = readInt(numberMessage);
+
+            if (value > 0) {
+                return value;
+            }
+
+            System.out.println("Please enter a number greater than zero.");
+        }
+    }
+
+    double readPositiveDouble(String decimalMessage) {
+        while (true) {
+            double value = readDouble(decimalMessage);
+
+            if (value > 0) {
+                return value;
+            }
+
+            System.out.println("Please enter a number greater than zero.");
+        }
     }
 }

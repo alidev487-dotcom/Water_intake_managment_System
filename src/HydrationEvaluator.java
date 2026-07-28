@@ -5,6 +5,10 @@ public class HydrationEvaluator {
     }
 
     static String evaluate(double total, double goal) {
+        if (goal <= 0) {
+            return "No Goal Set";
+        }
+
         if (total >= goal) {
             return "Well Hydrated";
         }

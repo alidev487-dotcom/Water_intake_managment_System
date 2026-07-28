@@ -8,6 +8,10 @@ public class WaterIntakeManager {
     private final List<Double> waterHistory = new ArrayList<>();
 
     void addWaterIntake(double amount) {
+        if (amount <= 0) {
+            return;
+        }
+
         waterHistory.add(amount);
     }
 

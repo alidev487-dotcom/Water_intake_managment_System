@@ -74,9 +74,9 @@ public class MainSystem {
         System.out.println("\n===== Register User =====");
 
         user.setName(inputHandler.readText("Enter Name: "));
-        user.setAge(inputHandler.readInt("Enter Age: "));
+        user.setAge(inputHandler.readPositiveInt("Enter Age: "));
         user.setGender(inputHandler.readText("Enter Gender: "));
-        user.setWeight(inputHandler.readDouble("Enter Weight (kg): "));
+        user.setWeight(inputHandler.readPositiveDouble("Enter Weight (kg): "));
         user.setDailyWaterGoal(GoalCalculator.calculateDailyGoal(user.getWeight()));
 
         waterIntakeManager.clearHistory();
@@ -97,7 +97,7 @@ public class MainSystem {
             return;
         }
 
-        double amount = inputHandler.readDouble("Enter Water Intake (ml): ");
+        double amount = inputHandler.readPositiveDouble("Enter Water Intake (ml): ");
         waterIntakeManager.addWaterIntake(amount);
 
         System.out.println("Water Intake Added Successfully!");
