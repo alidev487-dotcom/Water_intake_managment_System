@@ -7,6 +7,7 @@ public class User {
     double dailyWaterGoal;
 
     boolean isRegistered() {
+
         return userName.length() > 0;
     }
 }

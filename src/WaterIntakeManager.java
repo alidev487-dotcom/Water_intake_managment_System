@@ -17,10 +17,12 @@ public class WaterIntakeManager {
     }
 
     boolean isEmpty() {
+
         return waterHistory.isEmpty();
     }
 
     void clearHistory() {
+
         waterHistory.clear();
     }
 

@@ -1,4 +1,4 @@
-// Team task: Towfiq Abu Hayat MD - calculates the recommended daily water goal.
+// Team task: Towfiq Abu Hayat MD
 public class GoalCalculator {
     static double calculateDailyGoal(double weight) {
         if (weight <= 0) {

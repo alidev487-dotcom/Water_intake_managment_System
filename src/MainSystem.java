@@ -1,7 +1,7 @@
 // Team task: AFFAN UMER - overall program flow, menu handling, and feature coordination.
 public class MainSystem {
     static final double MAX_WATER_INTAKE = 5000;
-
+    
     public static void main(String[] args) {
         InputHandler inputHandler = new InputHandler();
         User user = new User();
